@@ -9,17 +9,18 @@ import config_reader
 from model_load import model
 import json
 from scipy.ndimage.filters import gaussian_filter
+import sys
 
-def imageToJson():
+def imageToJson(images, title):
 
 	extensions_img = {".jpg", ".png", ".gif", ".bmp", ".jpeg"}
 
-	for filename in os.listdir('sample_images'):
+	for filename in images:
 		for ext in extensions_img:
 			if filename.endswith(ext):
-				test_image = 'sample_images/'+filename
+				test_image = 'sample_images/'+title+'/'+filename
 				file_noExt = os.path.splitext(filename)[0]
-				print('Now proccessing:', filename)
+				# print('Now proccessing:', filename)
 
 				oriImg = cv2.imread(test_image)  # B,G,R order
 				param, model_params = config_reader.config_reader()
@@ -40,11 +41,11 @@ def imageToJson():
 					# required shape (1, width, height, channels)
 					input_img = np.transpose(np.float32(
 										imageToTest_padded[:, :, :, np.newaxis]), (3, 0, 1, 2))
-					print("Input shape: " + str(input_img.shape))
+					# print("Input shape: " + str(input_img.shape))
 
 					output_blobs = model.predict(input_img)
 					## predict is mutli-thread error..
-					print("Output shape (heatmap): " + str(output_blobs[1].shape))
+					# print("Output shape (heatmap): " + str(output_blobs[1].shape))
 
 					# extract outputs, resize, and remove padding
 					heatmap = np.squeeze(output_blobs[1])  # output 1 is heatmaps
@@ -134,5 +135,15 @@ def imageToJson():
 
 				o['people'][0]['pose_keypoints'] = all_peaks_flat
 
-				with open('sample_jsons/'+file_noExt+'.json', 'w') as outfile:
+				with open('sample_jsons/'+title+'/'+file_noExt+'.json', 'w') as outfile:
 					json.dump(o, outfile)
+
+if __name__ == '__main__':
+
+	start = int(sys.argv[1])
+	end = int(sys.argv[2])
+	title = sys.argv[3]
+
+	filename = os.listdir('sample_images/' + title)
+
+	imageToJson(filename[start:end], title)

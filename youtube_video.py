@@ -6,8 +6,14 @@ import os
 def youtube_capture(url):
     
     video = pafy.new(url)
+    title = video.title.encode('utf8')
+    title = title[:10]
 
-    print('Youtube Title = ' + video.title)
+    now_dir = os.path.dirname(os.path.realpath(__file__)) + "/Pose_Estimation/sample_images/" + title
+    os.mkdir(now_dir)
+
+    print('Youtube Title = ' + title)
+
     best = video.getbest()
 
     cap = cv2.VideoCapture(best.url)
@@ -21,9 +27,9 @@ def youtube_capture(url):
         if key == 27:  # press ESC
             break
         cv2.IMREAD_UNCHANGED
-        cv2.imwrite(os.path.dirname(os.path.realpath(__file__)) + "/Pose_Estimation/sample_images/" + video.title + "{:0>5}".format(str(now)) + ".png", frame)
+        cv2.imwrite(now_dir + "/" + title + "_{:0>5}".format(str(now)) + ".png", frame)
         now = now + 1
 
     cv2.destroyAllWindows()
 
-    return video.title
+    return title

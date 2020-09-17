@@ -34,6 +34,7 @@ from src.RunModel import RunModel
 
 import pandas as pd 
 import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 import matplotlib
 matplotlib.use('Agg')
@@ -93,7 +94,9 @@ def visualize(img_path, img, proc_param, joints, verts, cam):
     plt.title('diff vp')
     plt.axis('off')
     plt.draw()
-    plt.savefig("hmr/output/images/"+os.path.splitext(os.path.basename(img_path))[0]+".png")
+    filename = os.path.splitext(os.path.basename(img_path))[0]
+    item = filename.split("_")
+    plt.savefig("hmr/output/images/"+item[0]+"/"+filename+".png")
     # import ipdb
     # ipdb.set_trace()
 
@@ -178,7 +181,9 @@ def main(img_path, json_path=None):
     joints_export['hip.Center_y'] = hipCenter.iloc[0][1::3].sum()/2
     joints_export['hip.Center_z'] = hipCenter.iloc[0][2::3].sum()/2
     
-    joints_export.to_csv("hmr/output/csv/"+os.path.splitext(os.path.basename(img_path))[0]+".csv")
+    filename = os.path.splitext(os.path.basename(img_path))[0]
+    item = filename.split("_")
+    joints_export.to_csv("hmr/output/csv/"+item[0]+"/"+filename+".csv")
     
 #     pose = pd.DataFrame(theta[:, 3:75])
     
