@@ -6,16 +6,16 @@ from numpy import ma
 import util
 import os
 import config_reader
-from model_load import model
+import model_load
 import json
 from scipy.ndimage.filters import gaussian_filter
-import sys
 
-def imageToJson(images, title):
+def imageToJson(title):
 
 	extensions_img = {".jpg", ".png", ".gif", ".bmp", ".jpeg"}
 
-	for filename in images:
+	model = model_load.load_model()
+	for filename in os.listdir('sample_images/'+title):
 		for ext in extensions_img:
 			if filename.endswith(ext):
 				test_image = 'sample_images/'+title+'/'+filename
@@ -137,13 +137,3 @@ def imageToJson(images, title):
 
 				with open('sample_jsons/'+title+'/'+file_noExt+'.json', 'w') as outfile:
 					json.dump(o, outfile)
-
-if __name__ == '__main__':
-
-	start = int(sys.argv[1])
-	end = int(sys.argv[2])
-	title = sys.argv[3]
-
-	filename = os.listdir('sample_images/' + title)
-
-	imageToJson(filename[start:end], title)

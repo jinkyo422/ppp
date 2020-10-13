@@ -107,33 +107,36 @@ def stageT_block(x, num_p, stage, branch):
     
     return x
 
-weights_path = "keras/model.h5" # orginal weights converted from caffe
-#weights_path = "training/weights.best.h5" # weights tarined from scratch 
+def load_model():
+    weights_path = "keras/model.h5" # orginal weights converted from caffe
+    #weights_path = "training/weights.best.h5" # weights tarined from scratch 
 
-input_shape = (None,None,3)
+    input_shape = (None,None,3)
 
-img_input = Input(shape=input_shape)
+    img_input = Input(shape=input_shape)
 
-stages = 6
-np_branch1 = 38
-np_branch2 = 19
+    stages = 6
+    np_branch1 = 38
+    np_branch2 = 19
 
-img_normalized = Lambda(lambda x: x / 256 - 0.5)(img_input)  # [-0.5, 0.5]
+    img_normalized = Lambda(lambda x: x / 256 - 0.5)(img_input)  # [-0.5, 0.5]
 
-# VGG
-stage0_out = vgg_block(img_normalized)
+    # VGG
+    stage0_out = vgg_block(img_normalized)
 
-# stage 1
-stage1_branch1_out = stage1_block(stage0_out, np_branch1, 1)
-stage1_branch2_out = stage1_block(stage0_out, np_branch2, 2)
-x = Concatenate()([stage1_branch1_out, stage1_branch2_out, stage0_out])
+    # stage 1
+    stage1_branch1_out = stage1_block(stage0_out, np_branch1, 1)
+    stage1_branch2_out = stage1_block(stage0_out, np_branch2, 2)
+    x = Concatenate()([stage1_branch1_out, stage1_branch2_out, stage0_out])
 
-# stage t >= 2
-for sn in range(2, stages + 1):
-    stageT_branch1_out = stageT_block(x, np_branch1, sn, 1)
-    stageT_branch2_out = stageT_block(x, np_branch2, sn, 2)
-    if (sn < stages):
-        x = Concatenate()([stageT_branch1_out, stageT_branch2_out, stage0_out])
+    # stage t >= 2
+    for sn in range(2, stages + 1):
+        stageT_branch1_out = stageT_block(x, np_branch1, sn, 1)
+        stageT_branch2_out = stageT_block(x, np_branch2, sn, 2)
+        if (sn < stages):
+            x = Concatenate()([stageT_branch1_out, stageT_branch2_out, stage0_out])
 
-model = Model(img_input, [stageT_branch1_out, stageT_branch2_out])
-model.load_weights(weights_path)
+    model = Model(img_input, [stageT_branch1_out, stageT_branch2_out])
+    model.load_weights(weights_path)
+
+    return model

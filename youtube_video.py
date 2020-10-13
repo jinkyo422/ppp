@@ -6,7 +6,8 @@ import os
 def youtube_capture(url):
     
     video = pafy.new(url)
-    title = video.title.encode('utf8')
+    title = video.title
+    title = title.replace(" ", "")
     title = title[:10]
 
     now_dir = os.path.dirname(os.path.realpath(__file__)) + "/Pose_Estimation/sample_images/" + title

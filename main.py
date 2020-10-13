@@ -4,13 +4,12 @@ import os
 import subprocess
 from hmr import csv_join
 import threading
+import multiprocessing
+import time
 
 images_path = 'Pose_Estimation/sample_images'
 jsons_path = 'Pose_Estimation/sample_jsons'
 title = ' '
-
-def imageToJson(a, b):
-    subprocess.call('python2 two_d_pose_estimation.py ' + str(a) + ' ' + str(b) + ' ' +title, shell=True)
 
 def jsonToCsv(images, jsons):
     for i in range(len(images)):
@@ -31,18 +30,9 @@ def main(url):
     images_path = 'sample_images/' + title
     sample_images = os.listdir(images_path)
     sample_images.sort(key=lambda x: (x.split('/')[-1].split('.')[0]))
-    size = len(sample_images)
-    thread_count = 4
-    threads = []
 
-    for i in range(thread_count):
-        thread = threading.Thread(target=imageToJson, args=(i*size/thread_count, (i+1)*size/thread_count, ))
-        thread.start()
-        threads.append(thread)
+    two_d_pose_estimation.imageToJson(title)
 
-    for thread in threads:
-        thread.join()
-        
     print('Multithreading Finish!!!')
 
     os.chdir('..')
@@ -53,7 +43,7 @@ def main(url):
     sample_jsons = os.listdir(jsons_path)
     sample_jsons.sort(key=lambda x: (x.split('/')[-1].split('.')[0]))
     size = len(sample_jsons)
-    thread_count = 36
+    thread_count = 20
     threads = []
 
     now_dir = os.path.dirname(os.path.realpath(__file__)) + "/hmr/output/csv/" + title
@@ -76,22 +66,22 @@ def main(url):
 
 if __name__ == '__main__':
     urlList = []
-    urlList.append('https://youtu.be/lWs7wDOdTYM') #pt
-    # urlList.append('https://www.youtube.com/watch?v=xRuXDojcbgk')
-    # urlList.append('https://www.youtube.com/watch?v=swRNeYw1JkY')
-    # urlList.append('https://www.youtube.com/watch?v=kEVW_Xv3TqY')
-    # urlList.append('https://www.youtube.com/watch?v=s4Yh35JyC2E')
-    # urlList.append('https://www.youtube.com/watch?v=mKXtVQnqhB4')
-    # urlList.append('https://www.youtube.com/watch?v=ezoZfZK75zA')
-    # urlList.append('https://www.youtube.com/watch?v=JYsusrFHGdg')
-    # urlList.append('https://www.youtube.com/watch?v=vAFCrMgJrmI')
-    # urlList.append('https://www.youtube.com/watch?v=0SNnCr0-9AQ')
-    # urlList.append('https://www.youtube.com/watch?v=ID1KMP2AKfc')
-    # urlList.append('https://www.youtube.com/watch?v=2f1mpyYAulw')
-    # urlList.append('https://www.youtube.com/watch?v=j_WizUnWyQk')
-    # urlList.append('https://www.youtube.com/watch?v=M8PX2E88Ufo')
-    # urlList.append('https://www.youtube.com/watch?v=5MUjkisuHB8')
-    # urlList.append('https://www.youtube.com/watch?v=rsFzLJT9rzA')
+    # urlList.append('https://www.youtube.com/watch?v=VP5UPUSDC4M&ab_channel=pigmie') #BACKHANDSPRING
+    # urlList.append('https://youtu.be/lWs7wDOdTYM') #pt
+    # urlList.append('https://youtu.be/z3jUHGaKOxE')
+    # urlList.append('https://youtu.be/tkcFmkmKRdM')
+    # urlList.append('https://youtu.be/UZAa_Qu0LvU')
+    # urlList.append('https://youtu.be/qN_YheWcXek')
+    # urlList.append('https://youtu.be/VtoxgqJh3Nw')
+    # urlList.append('https://youtu.be/oTFstcVkPEo')
+    # urlList.append('https://youtu.be/yw9Q6UhiWlU')
+    urlList.append('https://youtu.be/bzZNYJNAbEM')
+    urlList.append('https://youtu.be/Y0Gr09B5Uk8')
+    urlList.append('https://youtu.be/iEZmNyeHg4I')
+    urlList.append('https://youtu.be/5JLEpEB1N3g')
+    urlList.append('https://youtu.be/q24O3zYFf9E')
+    urlList.append('https://youtu.be/uKWpaK18OJs')
+    urlList.append('https://youtu.be/H78mpMup8Wo')
 
     for url in urlList:
         main(url)
