@@ -13,8 +13,6 @@ def youtube_capture(url):
     now_dir = os.path.dirname(os.path.realpath(__file__)) + "/Pose_Estimation/sample_images/" + title
     os.mkdir(now_dir)
 
-    print('Youtube Title = ' + title)
-
     best = video.getbest()
 
     cap = cv2.VideoCapture(best.url)
@@ -32,5 +30,5 @@ def youtube_capture(url):
         now = now + 1
 
     cv2.destroyAllWindows()
-
+    print('Capture Finish!! Title = ' + title)
     return title
