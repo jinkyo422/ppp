@@ -169,8 +169,4 @@ dmypy.json
 # data
 models.tar.gz
 Pose_Estimation/keras/*
-Pose_Estimation/sample_images/*
-Pose_Estimation/sample_jsons/*
 hmr/models/*
-hmr/output/csv
-hmr/output/images
