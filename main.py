@@ -88,6 +88,8 @@ if __name__ == '__main__':
     # urlList.append('https://youtu.be/q24O3zYFf9E')
     # urlList.append('https://youtu.be/uKWpaK18OJs')
     # urlList.append('https://youtu.be/H78mpMup8Wo')
-    urlList.append('https://youtu.be/g9VLw4Hjkzk') #test
+
+    # Add the youtube link you want
+    # urlList.append('HERE')
     
     main(urlList)
