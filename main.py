@@ -72,21 +72,22 @@ def main(urlList):
 
 if __name__ == '__main__':
     urlList = []
-    urlList.append('https://youtu.be/QF7JkUH-2eo') #BACKHANDSPRING
-    urlList.append('https://youtu.be/lWs7wDOdTYM') #pt
-    urlList.append('https://youtu.be/z3jUHGaKOxE')
-    urlList.append('https://youtu.be/tkcFmkmKRdM')
-    urlList.append('https://youtu.be/UZAa_Qu0LvU')
-    urlList.append('https://youtu.be/qN_YheWcXek')
-    urlList.append('https://youtu.be/VtoxgqJh3Nw')
-    urlList.append('https://youtu.be/oTFstcVkPEo')
-    urlList.append('https://youtu.be/yw9Q6UhiWlU')
-    urlList.append('https://youtu.be/bzZNYJNAbEM')
-    urlList.append('https://youtu.be/Y0Gr09B5Uk8')
-    urlList.append('https://youtu.be/iEZmNyeHg4I')
-    urlList.append('https://youtu.be/5JLEpEB1N3g')
-    urlList.append('https://youtu.be/q24O3zYFf9E')
-    urlList.append('https://youtu.be/uKWpaK18OJs')
-    urlList.append('https://youtu.be/H78mpMup8Wo')
+    # urlList.append('https://youtu.be/QF7JkUH-2eo') #BACKHANDSPRING
+    # urlList.append('https://youtu.be/lWs7wDOdTYM') #pt
+    # urlList.append('https://youtu.be/z3jUHGaKOxE')
+    # urlList.append('https://youtu.be/tkcFmkmKRdM')
+    # urlList.append('https://youtu.be/UZAa_Qu0LvU')
+    # urlList.append('https://youtu.be/qN_YheWcXek')
+    # urlList.append('https://youtu.be/VtoxgqJh3Nw')
+    # urlList.append('https://youtu.be/oTFstcVkPEo')
+    # urlList.append('https://youtu.be/yw9Q6UhiWlU')
+    # urlList.append('https://youtu.be/bzZNYJNAbEM')
+    # urlList.append('https://youtu.be/Y0Gr09B5Uk8')
+    # urlList.append('https://youtu.be/iEZmNyeHg4I')
+    # urlList.append('https://youtu.be/5JLEpEB1N3g')
+    # urlList.append('https://youtu.be/q24O3zYFf9E')
+    # urlList.append('https://youtu.be/uKWpaK18OJs')
+    # urlList.append('https://youtu.be/H78mpMup8Wo')
+    urlList.append('https://youtu.be/g9VLw4Hjkzk') #test
     
     main(urlList)

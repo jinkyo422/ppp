@@ -1,3 +1,5 @@
+apt install ffmpeg
+apt-get install blender
 pip install pafy
 pip install youtube_dl
 pip install pandas
@@ -5,8 +7,6 @@ pip install pillow
 pip install ipython
 pip install configobj
 pip install opencv-python==4.2.0
-pip install tensorflow==1.13.1
-pip install keras==2.3.1
 pip install scikit-image
 pip install scipy
 pip install numpy

@@ -29,6 +29,9 @@ def youtube_capture(url):
         cv2.imwrite(now_dir + "/" + title + "_{:0>5}".format(str(now)) + ".png", frame)
         now = now + 1
 
+        if now == 11:
+            break
+
     cv2.destroyAllWindows()
     print('Capture Finish!! Title = ' + title)
     return title
